@@ -1,0 +1,36 @@
+{
+  "name": "gitbook-plugin-parts-autoindex",
+  "description": "Prepend summary index to each part title GitBook",
+  "main": "index.js",
+  "version": "0.0.1",
+  "engines": {
+    "gitbook": "*"
+  },
+  "homepage": "https://github.com/m0n0l0c0/gitbook-plugin-parts-autoindex",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m0n0l0c0/gitbook-plugin-parts-autoindex.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m0n0l0c0/gitbook-plugin-parts-autoindex/issues"
+  },
+  "gitbook": {
+    "properties": {
+      "level": {
+        "type": "number",
+        "description": "The number until which to prepend the level number (more on README).",
+        "required": false
+      },
+      "trim": {
+        "type": "number",
+        "description": "The amount on numbers to trim from the left from the summary level numbers (more on README).",
+        "required": false
+      }
+    }
+  },
+  "dependencies": {
+    "cheerio": "*",
+    "escape-string-regexp": "^1.0.5"
+  }
+}
