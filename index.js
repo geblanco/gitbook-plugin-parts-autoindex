@@ -11,14 +11,39 @@ function fixLevel(level){
 	return lev.join('.')
 }
 
-function processor(pageContent, article, level){
-	const regex = new RegExp('(#{1,' + level + '}\\s?)(' + escapeReg(article.title) + ')')
-	const artLevel = fixLevel(article.level)
-	let content = pageContent.replace(regex, `$1${artLevel} ${article.title}`)
+function expandArticles(article){
+	let articles = [{ title: article.title, level: article.level }]
 	article.articles.forEach(art => {
-		content = processor(content, art, level)
+		articles = articles.concat(expandArticles(art))
 	})
-	return content
+	return articles
+}
+
+function findElement($, article, level){
+	let found = false
+	let ret = null
+	for(let i = 0; i < level && !found; i++){
+		ret = $('h' + (i +1)).filter(function(idx, el){
+			return $(this).text().trim().toLowerCase() === article.title.trim().toLowerCase()
+		})
+		found = ret.text() !== ''
+	}
+	return found ? ret : null
+}
+
+function processor(pageContent, article, level){
+	const articles = expandArticles(article)
+	const $ = cheerio.load(pageContent)
+	articles.forEach(art => {
+		const artLevel = fixLevel(art.level)
+		// Find the element tag
+		const token = findElement($, art, level)
+		if( token ){
+			token.prepend(`<${token.name}>${artLevel} </${token.name}>`)
+			pageContent = $.html()
+		}
+	})
+	return pageContent
 }
 
 module.exports = {
@@ -26,8 +51,11 @@ module.exports = {
 		init: function(){
 			cfg.level = this.config.get('pluginsConfig')[PLUGIN_NAME]['level'] || 3
 			cfg.trim = this.config.get('pluginsConfig')[PLUGIN_NAME]['trim'] || 0
+			if( !fs.existsSync('./__out__') ){
+				fs.mkdirSync('./__out__')
+			}
 		},
-		'page:before': function(page){
+		page: function(page){
 			let article = this.summary.getArticleByPath(page.path)
 			page.content = processor(page.content, article, cfg.level)
 			return page
