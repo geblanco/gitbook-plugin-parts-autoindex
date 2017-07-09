@@ -1,7 +1,6 @@
 'use strict'
 
 const cheerio = require('cheerio')
-const escapeReg = require('escape-string-regexp')
 const PLUGIN_NAME = 'parts-autoindex'
 const cfg = {}
 
