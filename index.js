@@ -51,9 +51,6 @@ module.exports = {
 		init: function(){
 			cfg.level = this.config.get('pluginsConfig')[PLUGIN_NAME]['level'] || 3
 			cfg.trim = this.config.get('pluginsConfig')[PLUGIN_NAME]['trim'] || 0
-			if( !fs.existsSync('./__out__') ){
-				fs.mkdirSync('./__out__')
-			}
 		},
 		page: function(page){
 			let article = this.summary.getArticleByPath(page.path)

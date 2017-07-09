@@ -2,7 +2,7 @@
   "name": "gitbook-plugin-parts-autoindex",
   "description": "Prepend summary index to each part title GitBook",
   "main": "index.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "gitbook": "*"
   },
