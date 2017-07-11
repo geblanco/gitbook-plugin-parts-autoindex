@@ -2,7 +2,7 @@
   "name": "gitbook-plugin-parts-autoindex",
   "description": "Prepend summary index to each part title GitBook",
   "main": "index.js",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "engines": {
     "gitbook": "*"
   },
@@ -25,6 +25,11 @@
       "trim": {
         "type": "number",
         "description": "The amount on numbers to trim from the left from the summary level numbers (more on README).",
+        "required": false
+      },
+      "offset": {
+        "type": "number",
+        "description": "An optional offset to add/substract from the level",
         "required": false
       }
     }

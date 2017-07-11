@@ -21,7 +21,8 @@ In your `book.json` add
 	"pluginsConfig": {
 		"parts-autoindex": {
 			"level": 2,
-			"trim": 1
+			"trim": 1,
+			"offset": -1
 		}
 	}
 }
@@ -31,3 +32,4 @@ Where:
 
 * `level`: [optional, default: 3]. The number until which to prepend the level number eg: 1 = only to h1, 2 = h1, h2, 3 = h1, h2, h3, ...
 * `trim`: [optional, default: 0]. The amount on numbers to trim from the left from the summary level numbers, eg: 2.3.6 (trim=1) -> 3.6, useful when not using parts
+* `offset`: [optional, default: 0]. Offset to add/substract from the level, eg: 3.6 (offset=1) -> 4.6, (offset=-1) -> 2.6

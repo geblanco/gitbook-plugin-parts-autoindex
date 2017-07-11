@@ -7,6 +7,7 @@ const cfg = {}
 function fixLevel(level){
 	let lev = level.split('.')
 	for(let i = 0; i < cfg.trim && undefined !== lev.shift(); i++);
+	lev[0] = parseInt(lev[0]) + cfg.offset
 	return lev.join('.')
 }
 
@@ -50,6 +51,7 @@ module.exports = {
 		init: function(){
 			cfg.level = this.config.get('pluginsConfig')[PLUGIN_NAME]['level'] || 3
 			cfg.trim = this.config.get('pluginsConfig')[PLUGIN_NAME]['trim'] || 0
+			cfg.offset = parseInt(this.config.get('pluginsConfig')[PLUGIN_NAME]['offset']) || 0
 		},
 		page: function(page){
 			let article = this.summary.getArticleByPath(page.path)
